@@ -1,8 +1,11 @@
-FROM ruby:2.5.1-slim
+FROM ruby:2.6.1
 
 # Instala nossas dependencias
+#RUN apt-get update && apt-get install -qq -y --no-install-recommends \
+#    build-essential libpq-dev imagemagick curl
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get update && apt-get install -qq -y --no-install-recommends \
-    build-essential libpq-dev imagemagick curl
+build-essential nodejs libpq-dev imagemagick
 
 # Instalar o GNUPG
 RUN apt-get install -y gnupg
