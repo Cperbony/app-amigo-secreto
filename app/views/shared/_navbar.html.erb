@@ -8,7 +8,11 @@
         </span>
       </a>
 
-      <a href="#" data-activates="side-bar" class="button-collapse"><i class="material-icons">menu</i></a>
+      <a href="#"
+      data-target="mobile-demo"
+      class="sidenav-trigger">
+      <i class="material-icons">menu</i>
+      </a>
 
       <ul class="right hide-on-med-and-down">
         <% if current_user %>
@@ -25,7 +29,7 @@
 </div>
 
 
-<ul class="side-nav" id="side-bar">
+<ul class="side-nav" id="mobile-demo">
   <% if current_user %>
     <li><a href="/campaigns">Campanhas</a></li>
     <li><a href="/users/edit">Perfil</a></li>
