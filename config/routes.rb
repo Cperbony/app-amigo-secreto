@@ -1,6 +1,12 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'members/create'
+
+  get 'members/destroy'
+
+  get 'members/update'
+
   devise_for :users, :controllers => { registrations: 'registrations' }
   mount Sidekiq::Web => '/sidekiq'
 

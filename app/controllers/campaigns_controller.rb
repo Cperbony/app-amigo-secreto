@@ -13,10 +13,18 @@ class CampaignsController < ApplicationController
 
   def create
 <<<<<<< HEAD
+<<<<<<< HEAD
     @campaign = Campaign.new(user: current_user, title: "Nova Campanha", description: "Descreva sua campanha...")
 =======
     @campaign.new(campaign_params)
 >>>>>>> campaign_controller
+=======
+    @campaign = Campaign.new(
+      user: current_user,
+      title: "Nova Campanha",
+      description: "Descreva sua campanha...",
+    )
+>>>>>>> controller_member
 
     respond_to do |format|
       if @campaign.save
@@ -72,12 +80,18 @@ class CampaignsController < ApplicationController
 
   def campaign_params
 <<<<<<< HEAD
+<<<<<<< HEAD
     params.require(:campaign).permit(:title, :description, :event_date, :event_hour, :locale).merge(user: current_user)
 =======
     params.require(:campaign)
         .permit(:title, :description, :event_date, :event_hour, :location)
         .merge(user: current_user)
 >>>>>>> campaign_controller
+=======
+    params.require(:campaign)
+      .permit(:title, :description, :event_date, :event_hour, :locale)
+      .merge(user: current_user)
+>>>>>>> controller_member
   end
 
   def is_owner?

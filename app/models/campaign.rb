@@ -1,5 +1,5 @@
 class Campaign < ApplicationRecord
-  before_validation :set_member, on: :create
+  after_validation :set_member, on: :create
   before_validation :set_status, on: :create
 
   belongs_to :user
@@ -14,6 +14,9 @@ class Campaign < ApplicationRecord
   end
 
   def set_member
-    self.members << Member.create(name: self.user.name, email: self.user.email)
+    self.members << Member.create(
+      name: self.user.name,
+      email: self.user.email,
+    )
   end
 end
