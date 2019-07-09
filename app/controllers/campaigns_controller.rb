@@ -14,6 +14,7 @@ class CampaignsController < ApplicationController
   def create
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     @campaign = Campaign.new(user: current_user, title: "Nova Campanha", description: "Descreva sua campanha...")
 =======
     @campaign.new(campaign_params)
@@ -25,6 +26,9 @@ class CampaignsController < ApplicationController
       description: "Descreva sua campanha...",
     )
 >>>>>>> controller_member
+=======
+    @campaign.new(campaign_params)
+>>>>>>> campaign_controller
 
     respond_to do |format|
       if @campaign.save
@@ -57,9 +61,15 @@ class CampaignsController < ApplicationController
     respond_to do |format|
       if @campaign.status != "pending"
 <<<<<<< HEAD
+<<<<<<< HEAD
         format.json { render json: "Já foi sorteada", status: :unprocessable_entity }
       elsif @campaign.members.count < 3
         format.json { render json: "A campanha precisa de pelo menos 3 pessoas", status: :unprocessable_entity }
+=======
+        format.json { render json: 'Já foi sorteada', status: :unprocessable_entity }
+      elsif @campaign.members.count < 3
+        format.json { render json: 'A campanha precisa de pelo menos 3 pessoas', status: :unprocessable_entity }
+>>>>>>> campaign_controller
 =======
         format.json { render json: 'Já foi sorteada', status: :unprocessable_entity }
       elsif @campaign.members.count < 3
@@ -81,6 +91,7 @@ class CampaignsController < ApplicationController
   def campaign_params
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     params.require(:campaign).permit(:title, :description, :event_date, :event_hour, :locale).merge(user: current_user)
 =======
     params.require(:campaign)
@@ -92,6 +103,11 @@ class CampaignsController < ApplicationController
       .permit(:title, :description, :event_date, :event_hour, :locale)
       .merge(user: current_user)
 >>>>>>> controller_member
+=======
+    params.require(:campaign)
+        .permit(:title, :description, :event_date, :event_hour, :location)
+        .merge(user: current_user)
+>>>>>>> campaign_controller
   end
 
   def is_owner?
