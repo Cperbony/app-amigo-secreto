@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 require 'rails_helper'
 
 describe RaffleService do
@@ -57,3 +58,5 @@ describe RaffleService do
     end
   end
 end
+=======
+>>>>>>> controller_campaign
