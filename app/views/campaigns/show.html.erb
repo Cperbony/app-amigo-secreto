@@ -7,8 +7,7 @@
       <div class="col s8 offset-s2">
         <div class="card horizontal">
           <div class="card-content col s12">
-            <%= form_for @campaign, url: {action: "update"},
-            html: {class: "col s12 update_campaign"} do |f| %>
+            <%= form_for @campaign, url: {action: "update"}, html: {class: "col s12 update_campaign"} do |f| %>
               <div class="row">
                 <div class="row">
                   <div class="col s12 l4 input-field">
@@ -16,7 +15,7 @@
                     <label for="title" class="<%= (@campaign.title)? 'active' : '' %>">Título</label>
                   </div>
                   <div class="col s12 l3 input-field">
-                    <%= f.date_field :event_date, class: 'datepicker' %>
+                    <%= f.date_field :event_date, class: "datepicker" %>
                     <label for="title" class="<%= (@campaign.event_date)? 'active' : '' %>">Data</label>
                   </div>
                   <div class="col s12 l2 input-field">
@@ -24,7 +23,7 @@
                     <label for="title" class="<%= (@campaign.event_hour)? 'active' : '' %>">Hora</label>
                   </div>
                   <div class="col s12 l3 input-field">
-                    <%= f.text_field :locale, 'data-length': "20" %>
+                    <%= f.text_field :location, 'data-length': "20" %>
                     <label for="title" class="<%= (@campaign.location)? 'active' : '' %>">Local</label>
                   </div>
                 </div>
