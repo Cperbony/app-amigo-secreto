@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class MembersController < ApplicationController
   before_action :authenticate_user!, except: [:opened]
 
-  before_action :set_member, only: [:show, :destroy, :update]
-  before_action :is_owner?, only: [:show, :destroy, :update]
+  before_action :set_member, only: %i[show destroy update]
+  before_action :is_owner?, only: %i[show destroy update]
   before_action :set_member_by_token, only: [:opened]
 
   def create
@@ -10,7 +12,7 @@ class MembersController < ApplicationController
 
     respond_to do |format|
       if @member.save
-        format.json { render json: true }
+        format.json { render json: @member }
       else
         format.json { render json: @member.errors, status: :unprocessable_entity }
       end
@@ -37,8 +39,8 @@ class MembersController < ApplicationController
 
   def opened
     @member.update(open: true)
-    gif = Base64.decode64("R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==")
-    render text: gif, type: "image/gif"
+    gif = Base64.decode64('R0lGODlhAQABAPAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==')
+    render text: gif, type: 'image/gif'
   end
 
   private
