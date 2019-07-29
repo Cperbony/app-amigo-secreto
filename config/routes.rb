@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
 
   get 'members/update'
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, controllers: { registrations: 'registrations' }
   mount Sidekiq::Web => '/sidekiq'
 
   root to: 'pages#home'
@@ -17,5 +19,5 @@ Rails.application.routes.draw do
   end
 
   get 'members/:token/opened', to: 'members#opened'
-  resources :members, only: [:create, :destroy, :update]
+  resources :members, only: %i[create destroy update]
 end
