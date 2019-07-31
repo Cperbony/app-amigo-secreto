@@ -1,24 +1,34 @@
+# frozen_string_literal: true
+
 class CampaignsController < ApplicationController
   before_action :authenticate_user!
 
-  before_action :set_campaign, only: [:show, :destroy, :update, :raffle]
-  before_action :is_owner?, only: [:show, :destroy, :update, :raffle]
+  before_action :set_campaign, only: %i[show destroy update raffle]
+  before_action :is_owner?, only: %i[show destroy update raffle]
 
-  def show
-  end
+  def show; end
 
   def index
     @campaigns = current_user.campaigns
   end
 
   def create
-    @campaign = Campaign.new(user: current_user, title: 'Nova Campanha', description: 'Descreva sua campanha...')
+    @campaign = Campaign.new(
+      user: current_user,
+      title: 'Nova Campanha',
+      description: 'Descreva sua campanha...'
+    )
 
     respond_to do |format|
       if @campaign.save
-        format.html { redirect_to "/campaigns/#{@campaign.id}" }
+        format.html do
+          redirect_to "/campaigns/#{@campaign.id}"
+        end
       else
-        format.html { redirect_to main_app.root_url, notice: @campaign.errors }
+        format.html do
+          redirect_to main_app.root_url,
+                      notice: @campaign.errors
+        end
       end
     end
   end
@@ -28,7 +38,10 @@ class CampaignsController < ApplicationController
       if @campaign.update(campaign_params)
         format.json { render json: true }
       else
-        format.json { render json: @campaign.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @campaign.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -43,10 +56,16 @@ class CampaignsController < ApplicationController
 
   def raffle
     respond_to do |format|
-      if @campaign.status != "pending"
-        format.json { render json: 'Já foi sorteada', status: :unprocessable_entity }
+      if @campaign.status != 'pending'
+        format.json do
+          render json: 'Já foi sorteada',
+                 status: :unprocessable_entity
+        end
       elsif @campaign.members.count < 3
-        format.json { render json: 'A campanha precisa de pelo menos 3 pessoas', status: :unprocessable_entity }
+        format.json do
+          render json: 'A campanha precisa de pelo menos 3 pessoas',
+                 status: :unprocessable_entity
+        end
       else
         CampaignRaffleJob.perform_later @campaign
         format.json { render json: true }
@@ -62,8 +81,8 @@ class CampaignsController < ApplicationController
 
   def campaign_params
     params.require(:campaign)
-    .permit(:title, :description, :event_date, :event_hour, :location)
-    .merge(user: current_user)
+          .permit(:title, :description, :event_date, :event_hour, :location)
+          .merge(user: current_user)
   end
 
   def is_owner?

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module CampaignsHelper
-   def open_number(campaign)
+  def open_number(campaign)
     "#{campaign.count_opened}/#{campaign.members.count}"
-  end
+ end
 end

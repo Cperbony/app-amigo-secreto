@@ -6,6 +6,6 @@ $(document).on 'turbolinks:load', ->
     clear: 'Clear',
     close: 'Ok',
     closeOnSelect: true,
-    format: 'yyyy-mm-dd'
+    format: 'dd/mm/yyyy'
   });
   return

@@ -6,7 +6,7 @@ class CampaignMailer < ApplicationMailer
   #
   #   en.campaign_mailer.raffle.subject
   #
-  def raffle
+  def raffle(campaign, member, friend)
     @campaign = campaign
     @member = member
     @friend = friend
