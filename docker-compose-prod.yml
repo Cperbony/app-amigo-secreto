@@ -18,7 +18,7 @@ services:
     depends_on:
       - 'postgres'
       - 'redis'
-      - 'app'
+      - 'website'
     build: .
     command: bash start_jobs
     volumes_from:
@@ -26,7 +26,7 @@ services:
     env_file:
       - '.env-prod'
 
-  app:
+  website:
     depends_on:
       - 'postgres'
       - 'redis'
@@ -38,6 +38,17 @@ services:
     - box
     env_file:
     - '.env-prod'
+
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    links:
+      - website
+    ports:
+      - "80:80"
+
 
   box:
     image: busybox
